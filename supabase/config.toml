@@ -1,0 +1,10 @@
+project_id = "zcbubdxjesxmwasbfwso"
+
+[functions.scan-message]
+verify_jwt = false
+
+[functions.detect-grooming]
+verify_jwt = false
+
+[functions.safety-advisor]
+verify_jwt = false
