@@ -1,8 +1,9 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Shield, Search, Baby, LayoutDashboard, Bell, Users, Heart,
-  Sun, Moon, Globe, LogOut, Menu, X,
+  Sun, Moon, Globe, LogOut, Menu, X, Siren,
 } from "lucide-react";
+import EmergencySOSButton from "@/components/EmergencySOSButton";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,6 +25,7 @@ const AppLayout = () => {
     { path: "/app/alerts", icon: Bell, label: t("nav.alerts") },
     { path: "/app/family", icon: Users, label: t("nav.family") },
     { path: "/app/women-safety", icon: Heart, label: t("nav.womenSafety") },
+    { path: "/app/emergency", icon: Siren, label: t("nav.emergency" as any), highlight: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,6 +51,8 @@ const AppLayout = () => {
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 isActive(item.path)
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : (item as any).highlight
+                  ? "text-destructive hover:bg-destructive/10"
                   : "text-sidebar-foreground hover:bg-sidebar-accent/50"
               }`}
             >
@@ -120,6 +124,7 @@ const AppLayout = () => {
         <main className="flex-1 p-4 md:p-6">
           <Outlet />
         </main>
+        <EmergencySOSButton />
       </div>
     </div>
   );

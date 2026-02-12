@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, Shield, AlertTriangle, XCircle, Loader2 } from "lucide-react";
+import EmergencyCallout from "@/components/EmergencyCallout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -157,6 +158,10 @@ const Scanner = () => {
             <p className="text-card-foreground">{result.explanation}</p>
           </CardContent>
         </Card>
+      )}
+
+      {result && result.verdict === "dangerous" && (
+        <EmergencyCallout type="scam" />
       )}
     </div>
   );

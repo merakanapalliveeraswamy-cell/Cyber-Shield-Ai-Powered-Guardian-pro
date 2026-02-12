@@ -17,6 +17,7 @@ export const translations = {
     "nav.login": "Login",
     "nav.signup": "Sign Up",
     "nav.logout": "Logout",
+    "nav.emergency": "🆘 Emergency",
 
     // Landing
     "landing.hero.title": "India's AI Guardian for",
@@ -122,6 +123,7 @@ export const translations = {
     "nav.login": "लॉगिन",
     "nav.signup": "साइन अप",
     "nav.logout": "लॉगआउट",
+    "nav.emergency": "🆘 आपातकाल",
 
     // Landing
     "landing.hero.title": "भारत का AI गार्जियन",

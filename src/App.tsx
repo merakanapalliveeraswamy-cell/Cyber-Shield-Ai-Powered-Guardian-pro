@@ -17,6 +17,7 @@ import ChildSafety from "./pages/ChildSafety";
 import Alerts from "./pages/Alerts";
 import Family from "./pages/Family";
 import WomenSafety from "./pages/WomenSafety";
+import Emergency from "./pages/Emergency";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route path="alerts" element={<Alerts />} />
         <Route path="family" element={<Family />} />
         <Route path="women-safety" element={<WomenSafety />} />
+        <Route path="emergency" element={<Emergency />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

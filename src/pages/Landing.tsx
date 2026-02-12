@@ -3,6 +3,7 @@ import { Shield, Search, Baby, Users, Heart, Lock, ChevronRight, Sun, Moon, Glob
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import EmergencySOSButton from "@/components/EmergencySOSButton";
 
 const Landing = () => {
   const { t, language, setLanguage } = useLanguage();
@@ -159,6 +160,7 @@ const Landing = () => {
           <p>© 2026 CyberShield. India's AI Guardian for Digital Safety.</p>
         </div>
       </footer>
+      <EmergencySOSButton />
     </div>
   );
 };
