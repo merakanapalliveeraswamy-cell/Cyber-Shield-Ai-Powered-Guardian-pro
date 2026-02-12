@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Baby, Loader2, Shield, AlertTriangle, XCircle } from "lucide-react";
+import EmergencyCallout from "@/components/EmergencyCallout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -100,6 +101,10 @@ const ChildSafety = () => {
             )}
           </CardContent>
         </Card>
+      )}
+
+      {result && (result.risk_level === "high" || result.risk_level === "medium") && (
+        <EmergencyCallout type="child" />
       )}
     </div>
   );
