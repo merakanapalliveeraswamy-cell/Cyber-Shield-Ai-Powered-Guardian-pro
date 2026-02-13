@@ -100,6 +100,13 @@ export const translations = {
     "dashboard.scanHistory": "Scan History",
     "dashboard.noData": "No data yet. Start scanning to see insights.",
 
+    // Emergency
+    "emergency.sos.title": "Emergency SOS",
+    "emergency.sos.subtitle": "Instant access to verified national helplines and emergency support",
+    "emergency.sos.confirm": "Are you in danger?",
+    "emergency.sos.yes": "Yes, I need help",
+    "emergency.sos.no": "No, I'm safe",
+
     // Common
     "common.loading": "Loading...",
     "common.error": "Something went wrong",
@@ -205,6 +212,13 @@ export const translations = {
     "dashboard.recentAlerts": "हाल के अलर्ट",
     "dashboard.scanHistory": "स्कैन इतिहास",
     "dashboard.noData": "अभी तक कोई डेटा नहीं। इनसाइट्स देखने के लिए स्कैनिंग शुरू करें।",
+
+    // Emergency
+    "emergency.sos.title": "आपातकालीन SOS",
+    "emergency.sos.subtitle": "सत्यापित राष्ट्रीय हेल्पलाइन और आपातकालीन सहायता तक तत्काल पहुंच",
+    "emergency.sos.confirm": "क्या आप खतरे में हैं?",
+    "emergency.sos.yes": "हां, मुझे सहायता चाहिए",
+    "emergency.sos.no": "नहीं, मैं सुरक्षित हूं",
 
     // Common
     "common.loading": "लोड हो रहा है...",
