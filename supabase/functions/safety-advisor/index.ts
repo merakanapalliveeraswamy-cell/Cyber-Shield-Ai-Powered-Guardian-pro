@@ -9,7 +9,27 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { content, context } = await req.json();
+    const body = await req.json();
+    const content = body?.content;
+    const context = body?.context;
+
+    if (!content || typeof content !== 'string' || content.trim().length === 0) {
+      return new Response(JSON.stringify({ error: "Invalid or missing content" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    if (content.length > 10000) {
+      return new Response(JSON.stringify({ error: "Content too long (max 10000 characters)" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const allowedContexts = ["women_safety"];
+    if (context && !allowedContexts.includes(context)) {
+      return new Response(JSON.stringify({ error: "Invalid context" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
 
