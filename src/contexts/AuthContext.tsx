@@ -7,7 +7,7 @@ interface Profile {
   user_id: string;
   name: string;
   preferred_language: string;
-  profile_type: "parent" | "child" | "elderly";
+  profile_type: "parent" | "child" | "elderly" | "individual";
 }
 
 interface AuthContextType {

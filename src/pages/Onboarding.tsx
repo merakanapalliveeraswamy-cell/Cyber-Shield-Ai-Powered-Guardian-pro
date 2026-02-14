@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Shield, Users, Baby, UserCheck } from "lucide-react";
+import { Shield, Users, Baby, UserCheck, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-type ProfileType = "parent" | "child" | "elderly";
+type ProfileType = "parent" | "child" | "elderly" | "individual";
+
+const focusAreas: Record<ProfileType, string[]> = {
+  parent: ["Child monitoring", "Cyberbullying detection", "Screen-time insights", "Emergency alerts"],
+  child: ["Safe browsing AI", "Cyberbullying detection", "SOS help", "Educational safety tips"],
+  elderly: ["Scam & fraud detection", "Fake call alerts", "Large text UI", "Voice-based warnings"],
+  individual: ["Phishing detection", "Privacy monitoring", "Account breach alerts", "Safe browsing"],
+};
 
 const Onboarding = () => {
   const [selected, setSelected] = useState<ProfileType | null>(null);
@@ -19,6 +26,7 @@ const Onboarding = () => {
     { type: "parent", icon: Users, titleKey: "onboarding.parent", descKey: "onboarding.parentDesc" },
     { type: "child", icon: Baby, titleKey: "onboarding.child", descKey: "onboarding.childDesc" },
     { type: "elderly", icon: UserCheck, titleKey: "onboarding.elderly", descKey: "onboarding.elderlyDesc" },
+    { type: "individual", icon: User, titleKey: "onboarding.individual", descKey: "onboarding.individualDesc" },
   ];
 
   const handleContinue = async () => {
@@ -54,11 +62,20 @@ const Onboarding = () => {
                 <div className={`rounded-lg p-3 ${selected === opt.type ? "gradient-shield" : "bg-muted"}`}>
                   <opt.icon className={`h-6 w-6 ${selected === opt.type ? "text-primary-foreground" : "text-muted-foreground"}`} />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-card-foreground">{t(opt.titleKey as any)}</h3>
                   <p className="text-sm text-muted-foreground">{t(opt.descKey as any)}</p>
                 </div>
               </div>
+              {selected === opt.type && (
+                <div className="mt-3 flex flex-wrap gap-1.5 pl-16">
+                  {focusAreas[opt.type].map((area) => (
+                    <span key={area} className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              )}
             </Card>
           ))}
         </div>

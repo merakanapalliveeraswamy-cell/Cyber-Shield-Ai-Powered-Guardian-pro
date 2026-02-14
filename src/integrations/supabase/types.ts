@@ -175,7 +175,7 @@ export type Database = {
       is_parent_of: { Args: { target_user_id: string }; Returns: boolean }
     }
     Enums: {
-      profile_type: "parent" | "child" | "elderly"
+      profile_type: "parent" | "child" | "elderly" | "individual"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -303,7 +303,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      profile_type: ["parent", "child", "elderly"],
+      profile_type: ["parent", "child", "elderly", "individual"],
     },
   },
 } as const
