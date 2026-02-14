@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { Shield, Search, Baby, Users, Heart, Lock, ChevronRight, Sun, Moon, Globe } from "lucide-react";
+import { Shield, Search, Baby, Users, Heart, Lock, ChevronRight, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import EmergencySOSButton from "@/components/EmergencySOSButton";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Landing = () => {
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
   const features = [
@@ -35,14 +36,7 @@ const Landing = () => {
             <span className="text-xl font-bold text-foreground">CyberShield</span>
           </Link>
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setLanguage(language === "en" ? "hi" : "en")}
-              title={t("common.language")}
-            >
-              <Globe className="h-5 w-5" />
-            </Button>
+            <LanguageSwitcher />
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>

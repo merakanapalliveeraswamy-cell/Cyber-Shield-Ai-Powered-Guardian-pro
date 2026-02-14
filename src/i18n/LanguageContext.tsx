@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { translations, type Language, type TranslationKey } from "./translations";
+import { translations, type TranslationKey } from "./translations";
+import { type Language, LANGUAGES } from "./languages";
 
 interface LanguageContextType {
   language: Language;
@@ -9,10 +10,12 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const isValidLanguage = (val: string): val is Language => val in LANGUAGES;
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem("cybershield-lang");
-    return (saved === "hi" ? "hi" : "en") as Language;
+    return saved && isValidLanguage(saved) ? saved : "en";
   });
 
   const setLanguage = useCallback((lang: Language) => {
@@ -22,7 +25,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const t = useCallback(
     (key: TranslationKey): string => {
-      return translations[language][key] || translations.en[key] || key;
+      return translations[language]?.[key] || translations.en[key] || key;
     },
     [language]
   );
