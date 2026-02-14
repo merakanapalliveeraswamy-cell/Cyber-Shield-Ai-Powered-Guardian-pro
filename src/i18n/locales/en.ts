@@ -63,6 +63,8 @@ export const en = {
   "onboarding.childDesc": "Safe browsing & wellbeing",
   "onboarding.elderly": "Senior Citizen",
   "onboarding.elderlyDesc": "Simple scam detection",
+  "onboarding.individual": "Individual User",
+  "onboarding.individualDesc": "Personal digital safety & privacy",
   "onboarding.continue": "Continue",
   "scanner.title": "Scam Scanner",
   "scanner.subtitle": "Paste suspicious messages or URLs for AI analysis",
