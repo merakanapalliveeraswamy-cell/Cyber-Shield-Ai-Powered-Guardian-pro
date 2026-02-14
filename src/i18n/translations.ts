@@ -1,232 +1,33 @@
-export type Language = "en" | "hi";
+import { en } from "./locales/en";
+import { hi } from "./locales/hi";
+import { bn } from "./locales/bn";
+import { te } from "./locales/te";
+import { mr } from "./locales/mr";
+import { ta } from "./locales/ta";
+import { gu } from "./locales/gu";
+import { kn } from "./locales/kn";
+import { ml } from "./locales/ml";
+import { or_ } from "./locales/or";
+import { pa } from "./locales/pa";
+import { ur } from "./locales/ur";
+import type { Language } from "./languages";
 
-export const translations = {
-  en: {
-    // Nav
-    "nav.home": "Home",
-    "nav.scanner": "Scam Scanner",
-    "nav.childSafety": "Child Safety",
-    "nav.dashboard": "Dashboard",
-    "nav.alerts": "Alerts",
-    "nav.family": "Family",
-    "nav.wellbeing": "Wellbeing",
-    "nav.womenSafety": "Women Safety",
-    "nav.impact": "Impact",
-    "nav.about": "About",
-    "nav.settings": "Settings",
-    "nav.login": "Login",
-    "nav.signup": "Sign Up",
-    "nav.logout": "Logout",
-    "nav.emergency": "🆘 Emergency",
+export type TranslationKey = keyof typeof en;
 
-    // Landing
-    "landing.hero.title": "India's AI Guardian for",
-    "landing.hero.titleHighlight": "Digital Safety",
-    "landing.hero.subtitle": "Protecting children, families & elderly from cyber fraud, scams, and online threats — powered by AI, built for India.",
-    "landing.hero.cta": "Start Protecting Your Family",
-    "landing.hero.ctaSecondary": "Learn More",
-    "landing.features.title": "AI-Powered Protection",
-    "landing.features.subtitle": "Real-time threat detection designed for every Indian family",
-    "landing.features.scam.title": "Scam & Phishing Detection",
-    "landing.features.scam.desc": "AI analyzes SMS, emails, links & QR codes. Detects UPI fraud, fake job offers, bank impersonation & more.",
-    "landing.features.child.title": "Child Safety AI",
-    "landing.features.child.desc": "Detects online grooming, predator behavior & harmful content. Privacy-first — no messages stored.",
-    "landing.features.elderly.title": "Elderly Safety Mode",
-    "landing.features.elderly.desc": "One-tap 'Is this a scam?' with extra-large text, clear results & voice alerts.",
-    "landing.features.women.title": "Women's Safety",
-    "landing.features.women.desc": "Identifies fake profiles, sextortion & blackmail. AI-powered guidance on safe reporting.",
-    "landing.features.dashboard.title": "Parent Dashboard",
-    "landing.features.dashboard.desc": "Visual overview of threats blocked, risk scores & family safety trends.",
-    "landing.features.privacy.title": "Privacy-First AI",
-    "landing.features.privacy.desc": "No permanent message storage. Transparent AI explanations. Your data stays yours.",
-    "landing.impact.title": "Making India Safer",
-    "landing.impact.threats": "Threats Blocked",
-    "landing.impact.scams": "Scams Detected",
-    "landing.impact.children": "Children Protected",
-    "landing.impact.saved": "Money Saved (₹)",
-    "landing.modes.title": "Built for Everyone",
-    "landing.modes.subtitle": "CyberShield adapts to your needs",
-    "landing.cta.title": "Protect Your Family Today",
-    "landing.cta.subtitle": "Join thousands of Indian families using AI-powered digital safety.",
-    "landing.cta.button": "Get Started Free",
+const translations: Record<Language, Record<string, string>> = {
+  en, hi, bn, te, mr, ta, ur, gu, kn, ml, or: or_, pa,
+  as: hi, // Assamese fallback to Hindi
+  mai: hi, // Maithili fallback
+  sat: en, // Santali fallback
+  ks: hi, // Kashmiri fallback
+  ne: hi, // Nepali fallback
+  sd: ur, // Sindhi fallback to Urdu
+  kok: mr, // Konkani fallback to Marathi
+  doi: hi, // Dogri fallback
+  mni: bn, // Manipuri fallback to Bengali
+  brx: hi, // Bodo fallback
+  sa: hi, // Sanskrit fallback
+};
 
-    // Auth
-    "auth.login.title": "Welcome Back",
-    "auth.login.subtitle": "Sign in to your CyberShield account",
-    "auth.signup.title": "Create Account",
-    "auth.signup.subtitle": "Start protecting your family today",
-    "auth.email": "Email",
-    "auth.password": "Password",
-    "auth.name": "Full Name",
-    "auth.loginButton": "Sign In",
-    "auth.signupButton": "Create Account",
-    "auth.noAccount": "Don't have an account?",
-    "auth.hasAccount": "Already have an account?",
-    "auth.checkEmail": "Check your email for a verification link.",
-
-    // Onboarding
-    "onboarding.title": "How will you use CyberShield?",
-    "onboarding.subtitle": "We'll customize your experience",
-    "onboarding.parent": "Parent",
-    "onboarding.parentDesc": "Monitor family safety & threats",
-    "onboarding.child": "Young User",
-    "onboarding.childDesc": "Safe browsing & wellbeing",
-    "onboarding.elderly": "Senior Citizen",
-    "onboarding.elderlyDesc": "Simple scam detection",
-    "onboarding.continue": "Continue",
-
-    // Scanner
-    "scanner.title": "Scam Scanner",
-    "scanner.subtitle": "Paste suspicious messages or URLs for AI analysis",
-    "scanner.textTab": "Text Message",
-    "scanner.urlTab": "URL / Link",
-    "scanner.textPlaceholder": "Paste the suspicious SMS, WhatsApp message, or email text here...",
-    "scanner.urlPlaceholder": "https://suspicious-link.com",
-    "scanner.scanButton": "Scan Now",
-    "scanner.scanning": "Analyzing...",
-    "scanner.result.safe": "Safe",
-    "scanner.result.suspicious": "Suspicious",
-    "scanner.result.dangerous": "Dangerous",
-    "scanner.elderly.title": "Is This a Scam?",
-    "scanner.elderly.subtitle": "Paste the message below and tap the big button",
-    "scanner.elderly.button": "CHECK NOW",
-
-    // Dashboard
-    "dashboard.title": "Dashboard",
-    "dashboard.threats": "Threats Blocked",
-    "dashboard.scams": "Scams Detected",
-    "dashboard.riskScore": "Family Risk Score",
-    "dashboard.recentAlerts": "Recent Alerts",
-    "dashboard.scanHistory": "Scan History",
-    "dashboard.noData": "No data yet. Start scanning to see insights.",
-
-    // Emergency
-    "emergency.sos.title": "Emergency SOS",
-    "emergency.sos.subtitle": "Instant access to verified national helplines and emergency support",
-    "emergency.sos.confirm": "Are you in danger?",
-    "emergency.sos.yes": "Yes, I need help",
-    "emergency.sos.no": "No, I'm safe",
-
-    // Common
-    "common.loading": "Loading...",
-    "common.error": "Something went wrong",
-    "common.darkMode": "Dark Mode",
-    "common.lightMode": "Light Mode",
-    "common.language": "Language",
-  },
-  hi: {
-    // Nav
-    "nav.home": "होम",
-    "nav.scanner": "स्कैम स्कैनर",
-    "nav.childSafety": "बच्चों की सुरक्षा",
-    "nav.dashboard": "डैशबोर्ड",
-    "nav.alerts": "अलर्ट",
-    "nav.family": "परिवार",
-    "nav.wellbeing": "कल्याण",
-    "nav.womenSafety": "महिला सुरक्षा",
-    "nav.impact": "प्रभाव",
-    "nav.about": "हमारे बारे में",
-    "nav.settings": "सेटिंग्स",
-    "nav.login": "लॉगिन",
-    "nav.signup": "साइन अप",
-    "nav.logout": "लॉगआउट",
-    "nav.emergency": "🆘 आपातकाल",
-
-    // Landing
-    "landing.hero.title": "भारत का AI गार्जियन",
-    "landing.hero.titleHighlight": "डिजिटल सुरक्षा",
-    "landing.hero.subtitle": "बच्चों, परिवारों और बुजुर्गों को साइबर धोखाधड़ी, स्कैम और ऑनलाइन खतरों से बचाना — AI द्वारा संचालित, भारत के लिए बनाया गया।",
-    "landing.hero.cta": "अपने परिवार की सुरक्षा शुरू करें",
-    "landing.hero.ctaSecondary": "और जानें",
-    "landing.features.title": "AI-संचालित सुरक्षा",
-    "landing.features.subtitle": "हर भारतीय परिवार के लिए रीयल-टाइम खतरा पहचान",
-    "landing.features.scam.title": "स्कैम और फिशिंग पहचान",
-    "landing.features.scam.desc": "AI SMS, ईमेल, लिंक और QR कोड का विश्लेषण करता है। UPI धोखाधड़ी, नकली नौकरी और बैंक प्रतिरूपण का पता लगाता है।",
-    "landing.features.child.title": "बच्चों की सुरक्षा AI",
-    "landing.features.child.desc": "ऑनलाइन ग्रूमिंग, शिकारी व्यवहार और हानिकारक सामग्री का पता लगाता है। गोपनीयता-प्रथम।",
-    "landing.features.elderly.title": "बुजुर्गों का सुरक्षा मोड",
-    "landing.features.elderly.desc": "एक-टैप 'क्या यह स्कैम है?' बड़े टेक्स्ट, स्पष्ट परिणाम और आवाज अलर्ट के साथ।",
-    "landing.features.women.title": "महिला सुरक्षा",
-    "landing.features.women.desc": "नकली प्रोफाइल, सेक्सटॉर्शन और ब्लैकमेल की पहचान। AI-संचालित सुरक्षित रिपोर्टिंग मार्गदर्शन।",
-    "landing.features.dashboard.title": "पैरेंट डैशबोर्ड",
-    "landing.features.dashboard.desc": "ब्लॉक किए गए खतरों, जोखिम स्कोर और परिवार सुरक्षा रुझानों का विज़ुअल अवलोकन।",
-    "landing.features.privacy.title": "गोपनीयता-प्रथम AI",
-    "landing.features.privacy.desc": "कोई स्थायी संदेश भंडारण नहीं। पारदर्शी AI स्पष्टीकरण। आपका डेटा आपका है।",
-    "landing.impact.title": "भारत को सुरक्षित बनाना",
-    "landing.impact.threats": "खतरे रोके गए",
-    "landing.impact.scams": "स्कैम पकड़े गए",
-    "landing.impact.children": "बच्चे सुरक्षित",
-    "landing.impact.saved": "बचाए गए (₹)",
-    "landing.modes.title": "सबके लिए बनाया गया",
-    "landing.modes.subtitle": "CyberShield आपकी जरूरतों के अनुसार ढलता है",
-    "landing.cta.title": "आज ही अपने परिवार की सुरक्षा करें",
-    "landing.cta.subtitle": "AI-संचालित डिजिटल सुरक्षा का उपयोग करने वाले हज़ारों भारतीय परिवारों से जुड़ें।",
-    "landing.cta.button": "मुफ़्त शुरू करें",
-
-    // Auth
-    "auth.login.title": "वापस स्वागत है",
-    "auth.login.subtitle": "अपने CyberShield खाते में साइन इन करें",
-    "auth.signup.title": "खाता बनाएं",
-    "auth.signup.subtitle": "आज ही अपने परिवार की सुरक्षा शुरू करें",
-    "auth.email": "ईमेल",
-    "auth.password": "पासवर्ड",
-    "auth.name": "पूरा नाम",
-    "auth.loginButton": "साइन इन",
-    "auth.signupButton": "खाता बनाएं",
-    "auth.noAccount": "खाता नहीं है?",
-    "auth.hasAccount": "पहले से खाता है?",
-    "auth.checkEmail": "सत्यापन लिंक के लिए अपना ईमेल चेक करें।",
-
-    // Onboarding
-    "onboarding.title": "आप CyberShield कैसे उपयोग करेंगे?",
-    "onboarding.subtitle": "हम आपका अनुभव कस्टमाइज़ करेंगे",
-    "onboarding.parent": "माता-पिता",
-    "onboarding.parentDesc": "परिवार सुरक्षा और खतरों की निगरानी",
-    "onboarding.child": "युवा उपयोगकर्ता",
-    "onboarding.childDesc": "सुरक्षित ब्राउज़िंग और कल्याण",
-    "onboarding.elderly": "वरिष्ठ नागरिक",
-    "onboarding.elderlyDesc": "सरल स्कैम पहचान",
-    "onboarding.continue": "जारी रखें",
-
-    // Scanner
-    "scanner.title": "स्कैम स्कैनर",
-    "scanner.subtitle": "AI विश्लेषण के लिए संदिग्ध संदेश या URL पेस्ट करें",
-    "scanner.textTab": "टेक्स्ट संदेश",
-    "scanner.urlTab": "URL / लिंक",
-    "scanner.textPlaceholder": "संदिग्ध SMS, WhatsApp संदेश, या ईमेल टेक्स्ट यहां पेस्ट करें...",
-    "scanner.urlPlaceholder": "https://suspicious-link.com",
-    "scanner.scanButton": "अभी स्कैन करें",
-    "scanner.scanning": "विश्लेषण हो रहा है...",
-    "scanner.result.safe": "सुरक्षित",
-    "scanner.result.suspicious": "संदिग्ध",
-    "scanner.result.dangerous": "खतरनाक",
-    "scanner.elderly.title": "क्या यह स्कैम है?",
-    "scanner.elderly.subtitle": "नीचे संदेश पेस्ट करें और बड़ा बटन दबाएं",
-    "scanner.elderly.button": "अभी जांचें",
-
-    // Dashboard
-    "dashboard.title": "डैशबोर्ड",
-    "dashboard.threats": "खतरे रोके गए",
-    "dashboard.scams": "स्कैम पकड़े गए",
-    "dashboard.riskScore": "परिवार जोखिम स्कोर",
-    "dashboard.recentAlerts": "हाल के अलर्ट",
-    "dashboard.scanHistory": "स्कैन इतिहास",
-    "dashboard.noData": "अभी तक कोई डेटा नहीं। इनसाइट्स देखने के लिए स्कैनिंग शुरू करें।",
-
-    // Emergency
-    "emergency.sos.title": "आपातकालीन SOS",
-    "emergency.sos.subtitle": "सत्यापित राष्ट्रीय हेल्पलाइन और आपातकालीन सहायता तक तत्काल पहुंच",
-    "emergency.sos.confirm": "क्या आप खतरे में हैं?",
-    "emergency.sos.yes": "हां, मुझे सहायता चाहिए",
-    "emergency.sos.no": "नहीं, मैं सुरक्षित हूं",
-
-    // Common
-    "common.loading": "लोड हो रहा है...",
-    "common.error": "कुछ गलत हो गया",
-    "common.darkMode": "डार्क मोड",
-    "common.lightMode": "लाइट मोड",
-    "common.language": "भाषा",
-  },
-} as const;
-
-export type TranslationKey = keyof typeof translations.en;
+export { translations };
+export type { Language } from "./languages";

@@ -9,11 +9,12 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/i18n/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const AppLayout = () => {
   const { profile, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -86,9 +87,7 @@ const AppLayout = () => {
           </div>
           <div className="hidden md:block" />
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={() => setLanguage(language === "en" ? "hi" : "en")}>
-              <Globe className="h-5 w-5" />
-            </Button>
+            <LanguageSwitcher />
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
