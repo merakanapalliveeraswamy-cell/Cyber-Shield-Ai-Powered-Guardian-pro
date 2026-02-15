@@ -81,7 +81,7 @@ const Signup = () => {
           </form>
           <p className="mt-4 text-center text-sm text-muted-foreground">
             {t("auth.hasAccount")}{" "}
-            <Link to="/login" className="font-medium text-primary hover:underline">{t("nav.login")}</Link>
+            <Link to="/onboarding" className="font-medium text-primary hover:underline">{t("nav.login")}</Link>
           </p>
         </CardContent>
       </Card>
