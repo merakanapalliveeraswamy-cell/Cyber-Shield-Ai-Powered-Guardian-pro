@@ -83,10 +83,12 @@ Analyze the user's message for ALL of these threat categories:
 1. PHISHING: urgency words ("immediately", "account blocked", "verify now", "KYC expired"), fake sender names
 2. FRAUD LINKS: shortened URLs (bit.ly, tinyurl, goo.gl, etc.), unknown/suspicious domains
 3. UPI SCAM: fake UPI IDs, payment requests, cashback fraud
-4. STRANGER CONTACT: unknown sender patterns, social engineering
-5. INAPPROPRIATE CONTENT: explicit, violent, or misleading content
-6. HARASSMENT: threatening language, sextortion, blackmail (especially for women safety)
-7. LATE NIGHT ACTIVITY: if context suggests unusual timing patterns
+4. FINANCIAL FRAUD: bank impersonation, fake loan offers, credit card fraud, investment scams, Ponzi schemes, fake insurance claims, unauthorized debit alerts
+5. STRANGER CONTACT: unknown sender patterns, social engineering
+6. INAPPROPRIATE CONTENT: explicit, violent, or misleading content
+7. HARASSMENT: threatening language, sextortion, blackmail (especially for women safety)
+8. LATE NIGHT ACTIVITY: if context suggests unusual timing patterns
+9. CYBERBULLYING: repeated targeting, mean messages, exclusion tactics, rumor spreading
 
 You MUST respond using the scan_result tool with your analysis.`;
 
@@ -113,7 +115,7 @@ You MUST respond using the scan_result tool with your analysis.`;
                 properties: {
                   alert_type: {
                     type: "string",
-                    enum: ["phishing", "fraud_link", "stranger_contact", "upi_scam", "inappropriate_content", "harassment", "late_night_activity", "safe"],
+                    enum: ["phishing", "fraud_link", "stranger_contact", "upi_scam", "financial_fraud", "inappropriate_content", "harassment", "late_night_activity", "cyberbullying", "safe"],
                   },
                   severity: { type: "string", enum: ["safe", "caution", "danger"] },
                   title: { type: "string", description: "Short alert title (e.g. 'Phishing Alert', 'Safe Message')" },
