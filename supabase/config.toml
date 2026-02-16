@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.safety-advisor]
 verify_jwt = false
+
+[functions.chatbot-scan]
+verify_jwt = false

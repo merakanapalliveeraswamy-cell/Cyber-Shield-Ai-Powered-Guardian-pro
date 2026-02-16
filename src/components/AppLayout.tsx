@@ -4,6 +4,7 @@ import {
   Sun, Moon, Globe, LogOut, Menu, X, Siren,
 } from "lucide-react";
 import EmergencySOSButton from "@/components/EmergencySOSButton";
+import ChatbotAlert from "@/components/ChatbotAlert";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -123,6 +124,7 @@ const AppLayout = () => {
         <main className="flex-1 p-4 md:p-6">
           <Outlet />
         </main>
+        <ChatbotAlert />
         <EmergencySOSButton />
       </div>
     </div>
