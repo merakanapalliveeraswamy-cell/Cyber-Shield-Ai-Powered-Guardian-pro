@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import EmergencySOSButton from "@/components/EmergencySOSButton";
 import ChatbotAlert from "@/components/ChatbotAlert";
+import NotificationBell from "@/components/NotificationBell";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -88,6 +89,7 @@ const AppLayout = () => {
           </div>
           <div className="hidden md:block" />
           <div className="flex items-center gap-1">
+            <NotificationBell />
             <LanguageSwitcher />
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
