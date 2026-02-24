@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://esm.sh/zod@3.23.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,18 +33,20 @@ serve(async (req) => {
     const userId = claimsData.claims.sub as string;
 
     const body = await req.json();
-    const { message, profile_type, language } = body;
 
-    if (!message || typeof message !== "string" || message.trim().length === 0) {
-      return new Response(JSON.stringify({ error: "Message is required" }), {
+    const ChatbotScanSchema = z.object({
+      message: z.string().trim().min(1, "Message is required").max(5000, "Message too long (max 5000 chars)"),
+      profile_type: z.enum(["parent", "child", "women", "elderly", "individual"]).optional(),
+      language: z.string().max(10).optional(),
+    });
+
+    const parsed = ChatbotScanSchema.safeParse(body);
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: parsed.error.issues[0]?.message || "Invalid input" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (message.length > 5000) {
-      return new Response(JSON.stringify({ error: "Message too long (max 5000 chars)" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const { message, profile_type, language } = parsed.data;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");

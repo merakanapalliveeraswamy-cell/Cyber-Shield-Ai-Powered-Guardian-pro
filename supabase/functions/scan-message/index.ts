@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://esm.sh/zod@3.23.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -31,24 +32,19 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const content = body?.content;
-    const type = body?.type;
 
-    if (!content || typeof content !== 'string' || content.trim().length === 0) {
-      return new Response(JSON.stringify({ error: "Invalid or missing content" }), {
+    const ScanMessageSchema = z.object({
+      content: z.string().trim().min(1, "Content is required").max(10000, "Content too long (max 10000 characters)"),
+      type: z.enum(["text", "url"]).optional(),
+    });
+
+    const parsed = ScanMessageSchema.safeParse(body);
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: parsed.error.issues[0]?.message || "Invalid input" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (content.length > 10000) {
-      return new Response(JSON.stringify({ error: "Content too long (max 10000 characters)" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-    if (type && !["text", "url"].includes(type)) {
-      return new Response(JSON.stringify({ error: "Invalid type. Must be 'text' or 'url'" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const { content, type } = parsed.data;
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
