@@ -144,7 +144,7 @@ Be thorough but concise. If a message looks like a genuine scam, mark it dangero
     });
   } catch (e) {
     console.error("scan-message error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
