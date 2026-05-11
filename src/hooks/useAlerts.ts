@@ -37,7 +37,7 @@ export const useAlerts = () => {
 
     if (!user) return;
     const channel = supabase
-      .channel(`alerts-realtime-${user.id}`)
+      .channel(`alerts-realtime-${user.id}-${Math.random().toString(36).slice(2)}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "alerts", filter: `user_id=eq.${user.id}` },
@@ -52,7 +52,8 @@ export const useAlerts = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, fetchAlerts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   const markRead = async (id: string) => {
     await supabase.from("alerts").update({ is_read: true }).eq("id", id);
