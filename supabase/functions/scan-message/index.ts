@@ -46,6 +46,34 @@ serve(async (req) => {
     }
     const { content, type } = parsed.data;
 
+    // SSRF prevention: when scanning a URL, reject private/internal hosts
+    if (type === "url") {
+      try {
+        const u = new URL(content.trim());
+        if (!["http:", "https:"].includes(u.protocol)) {
+          return new Response(JSON.stringify({ error: "Only http/https URLs are allowed" }), {
+            status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        const host = u.hostname.toLowerCase();
+        const blocked =
+          host === "localhost" ||
+          host.endsWith(".local") ||
+          host.endsWith(".internal") ||
+          /^(127\.|10\.|169\.254\.|192\.168\.)/.test(host) ||
+          /^172\.(1[6-9]|2\d|3[0-1])\./.test(host) ||
+          host === "::1" ||
+          host.startsWith("fc") || host.startsWith("fd") || host.startsWith("fe80:");
+        if (blocked) {
+          return new Response(JSON.stringify({ error: "Private/internal URLs are not allowed" }), {
+            status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+      } catch {
+        // Not a parseable URL — let AI analyze the raw text safely
+      }
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
 
