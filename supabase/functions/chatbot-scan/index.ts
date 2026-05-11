@@ -275,7 +275,7 @@ You MUST respond using the scan_result tool with your analysis.`;
     });
   } catch (e) {
     console.error("chatbot-scan error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }

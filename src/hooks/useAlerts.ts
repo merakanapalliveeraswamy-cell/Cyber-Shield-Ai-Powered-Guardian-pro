@@ -37,10 +37,10 @@ export const useAlerts = () => {
 
     if (!user) return;
     const channel = supabase
-      .channel("alerts-realtime")
+      .channel(`alerts-realtime-${user.id}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "alerts" },
+        { event: "INSERT", schema: "public", table: "alerts", filter: `user_id=eq.${user.id}` },
         (payload) => {
           const newAlert = payload.new as Alert;
           setAlerts((prev) => [newAlert, ...prev]);
