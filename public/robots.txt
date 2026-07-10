@@ -12,5 +12,3 @@ Allow: /
 
 User-agent: *
 Allow: /
-
-Sitemap: https://cyber-shield-ai-powered-com.lovable.app/sitemap.xml
