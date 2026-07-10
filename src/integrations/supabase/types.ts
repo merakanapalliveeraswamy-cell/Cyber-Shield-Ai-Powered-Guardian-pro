@@ -16,30 +16,66 @@ export type Database = {
     Tables: {
       alerts: {
         Row: {
+          ai_explanation: string | null
           alert_type: string
+          category: string | null
+          confidence: number | null
           created_at: string
+          device: string | null
+          evidence: Json | null
           id: string
           is_read: boolean
+          location: string | null
           message: string
+          recommendations: Json | null
+          risk_score: number | null
           severity: string
+          source: string | null
+          status: string
+          title: string | null
+          updated_at: string
           user_id: string
         }
         Insert: {
+          ai_explanation?: string | null
           alert_type: string
+          category?: string | null
+          confidence?: number | null
           created_at?: string
+          device?: string | null
+          evidence?: Json | null
           id?: string
           is_read?: boolean
+          location?: string | null
           message: string
+          recommendations?: Json | null
+          risk_score?: number | null
           severity?: string
+          source?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string
           user_id: string
         }
         Update: {
+          ai_explanation?: string | null
           alert_type?: string
+          category?: string | null
+          confidence?: number | null
           created_at?: string
+          device?: string | null
+          evidence?: Json | null
           id?: string
           is_read?: boolean
+          location?: string | null
           message?: string
+          recommendations?: Json | null
+          risk_score?: number | null
           severity?: string
+          source?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string
           user_id?: string
         }
         Relationships: []

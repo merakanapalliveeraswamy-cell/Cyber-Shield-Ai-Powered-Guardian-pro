@@ -10,6 +10,18 @@ export interface Alert {
   message: string;
   is_read: boolean;
   created_at: string;
+  title?: string | null;
+  category?: string | null;
+  confidence?: number | null;
+  risk_score?: number | null;
+  status?: string | null;
+  source?: string | null;
+  device?: string | null;
+  location?: string | null;
+  evidence?: unknown;
+  ai_explanation?: string | null;
+  recommendations?: unknown;
+  updated_at?: string;
 }
 
 const MAX_RETRY_DELAY_MS = 30_000;
