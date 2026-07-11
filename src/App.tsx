@@ -18,6 +18,7 @@ import Alerts from "./pages/Alerts";
 import Family from "./pages/Family";
 import WomenSafety from "./pages/WomenSafety";
 import Emergency from "./pages/Emergency";
+import Guardian from "./pages/Guardian";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const AppRoutes = () => {
         <Route path="scanner" element={<Scanner />} />
         <Route path="child-safety" element={<ChildSafety />} />
         <Route path="alerts" element={<Alerts />} />
+        <Route path="guardian" element={<Guardian />} />
         <Route path="family" element={<Family />} />
         <Route path="women-safety" element={<WomenSafety />} />
         <Route path="emergency" element={<Emergency />} />

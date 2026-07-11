@@ -1,10 +1,9 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Shield, Search, Baby, LayoutDashboard, Bell, Users, Heart,
-  Sun, Moon, Globe, LogOut, Menu, X, Siren,
+  Sun, Moon, Globe, LogOut, Menu, X, Siren, Sparkles,
 } from "lucide-react";
 import EmergencySOSButton from "@/components/EmergencySOSButton";
-import ChatbotAlert from "@/components/ChatbotAlert";
 import NotificationBell from "@/components/NotificationBell";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -25,6 +24,7 @@ const AppLayout = () => {
     { path: "/app", icon: LayoutDashboard, label: t("nav.dashboard") },
     { path: "/app/scanner", icon: Search, label: t("nav.scanner") },
     { path: "/app/child-safety", icon: Baby, label: t("nav.childSafety") },
+    { path: "/app/guardian", icon: Sparkles, label: "AI Guardian" },
     { path: "/app/alerts", icon: Bell, label: t("nav.alerts") },
     { path: "/app/family", icon: Users, label: t("nav.family") },
     { path: "/app/women-safety", icon: Heart, label: t("nav.womenSafety") },
@@ -126,7 +126,14 @@ const AppLayout = () => {
         <main className="flex-1 p-4 md:p-6">
           <Outlet />
         </main>
-        <ChatbotAlert />
+        <button
+          onClick={() => navigate("/app/guardian")}
+          className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 text-white shadow-2xl shadow-emerald-500/40 transition-all hover:scale-110 active:scale-95"
+          aria-label="Open AI Guardian"
+        >
+          <Sparkles className="h-6 w-6" />
+          <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-background bg-emerald-400 animate-pulse" />
+        </button>
         <EmergencySOSButton />
       </div>
     </div>
