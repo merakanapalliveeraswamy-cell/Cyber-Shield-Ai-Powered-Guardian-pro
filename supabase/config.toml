@@ -11,9 +11,3 @@ verify_jwt = false
 
 [functions.chatbot-scan]
 verify_jwt = false
-
-[functions.classify-alert]
-verify_jwt = false
-
-[functions.guardian-chat]
-verify_jwt = false
