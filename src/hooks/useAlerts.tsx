@@ -156,10 +156,50 @@ export const useAlerts = () => {
             },
             (payload) => {
               const newAlert = payload.new as Alert;
-              setAlerts((prev) =>
-                prev.some((a) => a.id === newAlert.id) ? prev : [newAlert, ...prev]
-              );
-              setUnreadCount((prev) => prev + 1);
+              let isNew = false;
+              setAlerts((prev) => {
+                if (prev.some((a) => a.id === newAlert.id)) return prev;
+                isNew = true;
+                return [newAlert, ...prev];
+              });
+              if (isNew) {
+                if (!newAlert.is_read) setUnreadCount((prev) => prev + 1);
+                notifyAlert(newAlert);
+              }
+            }
+          )
+          .on(
+            "postgres_changes",
+            {
+              event: "UPDATE",
+              schema: "public",
+              table: "alerts",
+              filter: `user_id=eq.${user.id}`,
+            },
+            (payload) => {
+              const updated = payload.new as Alert;
+              setAlerts((prev) => {
+                const next = prev.map((a) => (a.id === updated.id ? { ...a, ...updated } : a));
+                setUnreadCount(next.filter((a) => !a.is_read).length);
+                return next;
+              });
+            }
+          )
+          .on(
+            "postgres_changes",
+            {
+              event: "DELETE",
+              schema: "public",
+              table: "alerts",
+            },
+            (payload) => {
+              const removedId = (payload.old as { id?: string })?.id;
+              if (!removedId) return;
+              setAlerts((prev) => {
+                const next = prev.filter((a) => a.id !== removedId);
+                setUnreadCount(next.filter((a) => !a.is_read).length);
+                return next;
+              });
             }
           )
           .subscribe((status, err) => {
