@@ -1,6 +1,40 @@
 import { useEffect, useState, useCallback, useRef } from "react";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+
+const severityStyles: Record<string, string> = {
+  critical: "bg-destructive/15 text-destructive border-destructive/40",
+  high: "bg-destructive/10 text-destructive border-destructive/30",
+  medium: "bg-amber-500/15 text-amber-600 border-amber-500/40",
+  low: "bg-emerald-500/15 text-emerald-600 border-emerald-500/40",
+};
+
+const SeverityBadge = ({ severity }: { severity: string }) => (
+  <span
+    className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+      severityStyles[severity?.toLowerCase()] ?? "bg-muted text-muted-foreground border-border"
+    }`}
+  >
+    {severity || "info"}
+  </span>
+);
+
+const notifyAlert = (alert: Alert) => {
+  const body = (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-2">
+        <SeverityBadge severity={alert.severity} />
+        <span className="text-sm font-semibold">{alert.title || alert.alert_type}</span>
+      </div>
+      <p className="text-xs opacity-80 line-clamp-3">{alert.message}</p>
+    </div>
+  );
+  const sev = (alert.severity || "").toLowerCase();
+  if (sev === "critical" || sev === "high") toast.error(body, { duration: 8000 });
+  else if (sev === "medium") toast.warning(body, { duration: 6000 });
+  else toast(body, { duration: 5000 });
+};
 
 export interface Alert {
   id: string;
