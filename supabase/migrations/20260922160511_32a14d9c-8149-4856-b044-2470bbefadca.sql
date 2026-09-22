@@ -1,0 +1,1 @@
+ALTER TABLE public.alerts REPLICA IDENTITY FULL;
